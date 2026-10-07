@@ -54,6 +54,8 @@ def handle_events():
 
 while running:
     handle_events()
+    move_x = sum(movement_keys[key][0] for key in pressed_keys)
+    move_y = sum(movement_keys[key][1] for key in pressed_keys)
     clear_canvas()
     ground.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
     character.clip_draw(
@@ -65,7 +67,7 @@ while running:
         character_y,
     )
     update_canvas()
-    character_x += direction * MOVE_SPEED
+    character_x += move_x * MOVE_SPEED
     frame = (frame + 1) % FRAME_COUNT
     delay(0.05)
 
