@@ -74,7 +74,13 @@ while running:
             character_x + move_x * MOVE_SPEED,
         ),
     )
-    character_y += move_y * MOVE_SPEED
+    character_y = max(
+        FRAME_SIZE // 2,
+        min(
+            CANVAS_HEIGHT - FRAME_SIZE // 2,
+            character_y + move_y * MOVE_SPEED,
+        ),
+    )
     frame = (frame + 1) % FRAME_COUNT
     delay(0.05)
 
