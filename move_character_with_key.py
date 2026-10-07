@@ -4,6 +4,9 @@ from pico2d import *
 
 
 CANVAS_WIDTH, CANVAS_HEIGHT = 1280, 1024
+FRAME_SIZE = 100
+FRAME_COUNT = 8
+MOVE_SPEED = 5
 
 open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
 image_dir = Path(__file__).resolve().parent
@@ -37,10 +40,17 @@ while running:
     handle_events()
     clear_canvas()
     ground.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100, 100, 100, character_x, 90)
+    character.clip_draw(
+        frame * FRAME_SIZE,
+        FRAME_SIZE,
+        FRAME_SIZE,
+        FRAME_SIZE,
+        character_x,
+        90,
+    )
     update_canvas()
-    character_x += direction * 5
-    frame = (frame + 1) % 8
+    character_x += direction * MOVE_SPEED
+    frame = (frame + 1) % FRAME_COUNT
     delay(0.05)
 
 close_canvas()
