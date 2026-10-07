@@ -18,6 +18,12 @@ character_x = CANVAS_WIDTH // 2
 character_y = CANVAS_HEIGHT // 2
 frame = 0
 direction = 0
+movement_keys = {
+    SDLK_LEFT: (-1, 0),
+    SDLK_RIGHT: (1, 0),
+    SDLK_UP: (0, 1),
+    SDLK_DOWN: (0, -1),
+}
 
 
 def handle_events():
