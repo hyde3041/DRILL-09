@@ -18,7 +18,7 @@ pressed_keys = set()
 character_x = CANVAS_WIDTH // 2
 character_y = CANVAS_HEIGHT // 2
 frame = 0
-direction = 0
+facing = 1
 movement_keys = {
     SDLK_LEFT: (-1, 0),
     SDLK_RIGHT: (1, 0),
@@ -28,7 +28,7 @@ movement_keys = {
 
 
 def handle_events():
-    global running, direction
+    global running
 
     for event in get_events():
         if event.type == SDL_QUIT:
@@ -36,26 +36,18 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key in movement_keys:
                 pressed_keys.add(event.key)
-            if event.key == SDLK_RIGHT:
-                direction = 1
-            elif event.key == SDLK_LEFT:
-                direction = -1
             elif event.key == SDLK_ESCAPE:
                 running = False
         elif event.type == SDL_KEYUP and event.key in movement_keys:
             pressed_keys.discard(event.key)
-            if SDLK_RIGHT in pressed_keys:
-                direction = 1
-            elif SDLK_LEFT in pressed_keys:
-                direction = -1
-            else:
-                direction = 0
 
 
 while running:
     handle_events()
     move_x = sum(movement_keys[key][0] for key in pressed_keys)
     move_y = sum(movement_keys[key][1] for key in pressed_keys)
+    if move_x:
+        facing = 1 if move_x > 0 else -1
     clear_canvas()
     ground.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
     character.clip_draw(
