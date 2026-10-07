@@ -49,7 +49,10 @@ while running:
     is_moving = move_x != 0 or move_y != 0
     if move_x:
         facing = 1 if move_x > 0 else -1
-    row = 1 if is_moving else 3
+    if is_moving:
+        row = 1 if facing > 0 else 0
+    else:
+        row = 3 if facing > 0 else 2
     clear_canvas()
     ground.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
     character.clip_draw(
