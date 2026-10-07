@@ -67,7 +67,13 @@ while running:
         character_y,
     )
     update_canvas()
-    character_x += move_x * MOVE_SPEED
+    character_x = max(
+        FRAME_SIZE // 2,
+        min(
+            CANVAS_WIDTH - FRAME_SIZE // 2,
+            character_x + move_x * MOVE_SPEED,
+        ),
+    )
     character_y += move_y * MOVE_SPEED
     frame = (frame + 1) % FRAME_COUNT
     delay(0.05)
