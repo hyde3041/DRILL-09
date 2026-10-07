@@ -14,6 +14,7 @@ ground = load_image(str(image_dir / 'TUK_GROUND.png'))
 character = load_image(str(image_dir / 'animation_sheet.png'))
 
 running = True
+pressed_keys = set()
 character_x = CANVAS_WIDTH // 2
 character_y = CANVAS_HEIGHT // 2
 frame = 0
@@ -33,6 +34,8 @@ def handle_events():
         if event.type == SDL_QUIT:
             running = False
         elif event.type == SDL_KEYDOWN:
+            if event.key in movement_keys:
+                pressed_keys.add(event.key)
             if event.key == SDLK_RIGHT:
                 direction = 1
             elif event.key == SDLK_LEFT:
