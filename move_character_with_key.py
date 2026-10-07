@@ -42,17 +42,7 @@ def handle_events():
             pressed_keys.discard(event.key)
 
 
-while running:
-    handle_events()
-    move_x = sum(movement_keys[key][0] for key in pressed_keys)
-    move_y = sum(movement_keys[key][1] for key in pressed_keys)
-    is_moving = move_x != 0 or move_y != 0
-    if move_x:
-        facing = 1 if move_x > 0 else -1
-    if is_moving:
-        row = 1 if facing > 0 else 0
-    else:
-        row = 3 if facing > 0 else 2
+def draw_scene(row):
     clear_canvas()
     ground.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
     character.clip_draw(
@@ -64,6 +54,20 @@ while running:
         character_y,
     )
     update_canvas()
+
+
+while running:
+    handle_events()
+    move_x = sum(movement_keys[key][0] for key in pressed_keys)
+    move_y = sum(movement_keys[key][1] for key in pressed_keys)
+    is_moving = move_x != 0 or move_y != 0
+    if move_x:
+        facing = 1 if move_x > 0 else -1
+    if is_moving:
+        row = 1 if facing > 0 else 0
+    else:
+        row = 3 if facing > 0 else 2
+    draw_scene(row)
     character_x = max(
         FRAME_SIZE // 2,
         min(
