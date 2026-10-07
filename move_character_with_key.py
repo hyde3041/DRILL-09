@@ -42,8 +42,14 @@ def handle_events():
                 direction = -1
             elif event.key == SDLK_ESCAPE:
                 running = False
-        elif event.type == SDL_KEYUP and event.key in (SDLK_LEFT, SDLK_RIGHT):
-            direction = 0
+        elif event.type == SDL_KEYUP and event.key in movement_keys:
+            pressed_keys.discard(event.key)
+            if SDLK_RIGHT in pressed_keys:
+                direction = 1
+            elif SDLK_LEFT in pressed_keys:
+                direction = -1
+            else:
+                direction = 0
 
 
 while running:
