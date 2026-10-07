@@ -3,9 +3,11 @@ from pathlib import Path
 from pico2d import *
 
 
-open_canvas()
+CANVAS_WIDTH, CANVAS_HEIGHT = 1280, 1024
+
+open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
 image_dir = Path(__file__).resolve().parent
-grass = load_image(str(image_dir / 'grass.png'))
+ground = load_image(str(image_dir / 'TUK_GROUND.png'))
 character = load_image(str(image_dir / 'animation_sheet.png'))
 
 running = True
@@ -34,7 +36,7 @@ def handle_events():
 while running:
     handle_events()
     clear_canvas()
-    grass.draw(400, 30)
+    ground.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
     character.clip_draw(frame * 100, 100, 100, 100, character_x, 90)
     update_canvas()
     character_x += direction * 5
