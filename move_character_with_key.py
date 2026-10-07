@@ -14,7 +14,8 @@ ground = load_image(str(image_dir / 'TUK_GROUND.png'))
 character = load_image(str(image_dir / 'animation_sheet.png'))
 
 running = True
-character_x = 400
+character_x = CANVAS_WIDTH // 2
+character_y = CANVAS_HEIGHT // 2
 frame = 0
 direction = 0
 
@@ -46,7 +47,7 @@ while running:
         FRAME_SIZE,
         FRAME_SIZE,
         character_x,
-        90,
+        character_y,
     )
     update_canvas()
     character_x += direction * MOVE_SPEED
